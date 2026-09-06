@@ -139,7 +139,7 @@ dotnet test
 
 ## Run frontend
 
-Prerequisite: Node.js and Angular CLI.
+Prerequisite: Node.js and npm.
 
 ```bash
 cd frontend/tic-tac-toe
@@ -166,6 +166,18 @@ AI assistance was used to accelerate scaffolding, implementation ideas, test-cas
 - API/frontend contract
 
 The final implementation and design decisions were reviewed and understood by the developer, and the application was tested locally before submission.
+
+### AI Prompt Summary
+
+Example prompts used during development included:
+
+- Generate a simple Angular + ASP.NET Core architecture for the Tic Tac Toe requirements.
+- Implement backend game state, move validation, win/draw detection, and move history.
+- Implement the required undo behavior for two-player and computer modes.
+- Generate unit tests covering the specified game scenarios.
+- Review the implementation against the assignment requirements and identify missing cases.
+
+AI-generated suggestions were reviewed, modified where necessary, and tested locally before inclusion.
 
 ## Known limitations
 
