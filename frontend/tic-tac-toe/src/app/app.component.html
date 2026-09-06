@@ -1,0 +1,75 @@
+<main class="page" *ngIf="game as g">
+  <section class="card">
+    <header>
+      <div>
+        <h1>Tic Tac Toe</h1>
+        <p class="muted">Angular + .NET Web API</p>
+      </div>
+
+      <label>
+        Mode
+        <select [(ngModel)]="mode" (ngModelChange)="changeMode()">
+          <option value="TwoPlayer">Two Player</option>
+          <option value="Computer">Play Against Computer</option>
+        </select>
+      </label>
+    </header>
+
+    <div class="status" [class.won]="g.status === 'Won'">
+      <strong *ngIf="g.status === 'InProgress'">
+        {{ g.mode === 'Computer' && g.currentPlayer === 'O' ? 'Computer is thinking…' : g.currentPlayer + "'s Turn" }}
+      </strong>
+      <strong *ngIf="g.status === 'Won'">Player {{ g.winner }} wins!</strong>
+      <strong *ngIf="g.status === 'Draw'">It's a draw!</strong>
+    </div>
+
+    <div class="board">
+  <button
+    *ngFor="let cell of g.board.flat(); let i = index"
+    class="cell"
+    [class.winner]="isWinningCell(row(i), column(i))"
+    [disabled]="!!cell || g.status !== 'InProgress' || busy"
+    (click)="play(row(i), column(i))">
+    {{ cell }}
+  </button>
+</div>
+
+    <p class="error" *ngIf="error">{{ error }}</p>
+
+    <div class="actions">
+      <button (click)="undo()" [disabled]="!g.moveHistory.length || g.status !== 'InProgress' || busy">
+        Undo Last Move
+      </button>
+      <button (click)="resetGame()">Reset Game</button>
+    </div>
+  </section>
+
+  <aside class="card side">
+    <section>
+      <h2>Scoreboard</h2>
+      <div class="scores">
+        <div><span>X Wins</span><strong>{{ g.scoreboard.xWins }}</strong></div>
+        <div><span>O Wins</span><strong>{{ g.scoreboard.oWins }}</strong></div>
+        <div><span>Draws</span><strong>{{ g.scoreboard.draws }}</strong></div>
+      </div>
+      <button class="secondary" (click)="resetScoreboard()">Reset Scoreboard</button>
+    </section>
+
+    <section>
+      <h2>Move History</h2>
+      <table *ngIf="g.moveHistory.length; else noMoves">
+        <thead>
+          <tr><th>Move</th><th>Player</th><th>Position</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let move of g.moveHistory">
+            <td>{{ move.number }}</td>
+            <td>{{ move.player }}</td>
+            <td>{{ position(move.row, move.column) }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #noMoves><p class="muted">No moves yet.</p></ng-template>
+    </section>
+  </aside>
+</main>
