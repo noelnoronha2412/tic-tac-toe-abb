@@ -165,7 +165,7 @@ AI assistance was used to accelerate scaffolding, implementation ideas, test-cas
 - computer move priority
 - API/frontend contract
 
-The final code should be reviewed and understood by the developer before submission.
+The final implementation and design decisions were reviewed and understood by the developer, and the application was tested locally before submission.
 
 ## Known limitations
 
